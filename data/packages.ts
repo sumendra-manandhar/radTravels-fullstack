@@ -1057,7 +1057,7 @@ export const packages: Package[] = [
     tagline:
       "The closest Himalayan trek from Kathmandu — dense forest, Tamang culture, and stunning glaciers. Perfect first Himalayan adventure with fewer crowds and raw natural beauty.",
     heroImage:
-      "hhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL-goJowVfht30FTpje62ontg-a21mwbbq16daETG1CA&s=10",
+      "https://cms.discoveryworldtrekking.com/media/7768/langtang-in-may.webp",
     galleryImages: [
       {
         src: "https://images.unsplash.com/photo-1565073624497-7144969f5c9b?w=1200&q=80",
@@ -1613,7 +1613,7 @@ export const packages: Package[] = [
     tagline:
       "Nepal's most famous short trek. Panoramic sunrise views of Annapurna, Dhaulagiri and Machhapuchhre — accessible to all ages, all fitness levels. Your first Himalayan memory.",
     heroImage:
-      "https://images.unsplash.com/photo-1553073520-80b5ad5ec870?w=2000&q=85",
+      "https://himalayatrip.com/wp-content/uploads/2025/01/Accommodation-During-Ghorepani-Poon-Hill-Trek.webp",
     galleryImages: [
       {
         src: "https://images.unsplash.com/photo-1553073520-80b5ad5ec870?w=1200&q=80",
@@ -1820,7 +1820,7 @@ export const packages: Package[] = [
     tagline:
       "The crown jewel of Nepal MTB. Muktinath to Pokhara through the world's deepest gorge, ancient cave monasteries, and Tibetan high-altitude desert — 200km of pure riding.",
     heroImage:
-      "https://images.unsplash.com/photo-1571732154690-f6d1c3e5178a?w=2000&q=85",
+      "https://www.nepalmountainbike.com/_next/image?url=https%3A%2F%2Fbackend.nepalmountainbike.com%2Fmedia%2Ffile-uploads%2Fmtb_tour%2Fmain_images%2FJomsom-Muktinath-mountain-bike-tour-with-PMTBA.jpg&w=3840&q=75",
     galleryImages: [
       {
         src: "https://images.unsplash.com/photo-1571732154690-f6d1c3e5178a?w=1200&q=80",
@@ -2114,7 +2114,7 @@ export const packages: Package[] = [
     tagline:
       "221km of the Annapurna Circuit by bike. Kathmandu test trails, Manang Valley singletrack, Thorong La Pass at 5,416m, and a descent nobody ever forgets.",
     heroImage:
-      "https://www.nepalmountainbike.com/_next/image?url=https%3A%2F%2Fbackend.nepalmountainbike.com%2Fmedia%2Ffile-uploads%2Fblogs%2Fmain_image%2F1775197749-Annapurna-circuit-mountain-bike-tour.jpg&w=3840&q=75",
+      "https://media.app.touchplanettreks.com/uploads/fullbanner/ascending-to-thorong-la-pass.webp",
     galleryImages: [
       {
         src: "https://images.unsplash.com/photo-1558980664-10e7170b5df9?w=1200&q=80",
@@ -2386,7 +2386,7 @@ export const packages: Package[] = [
     tagline:
       "Shivapuri forest singletrack, ancient temples, and rural Nepal — all within an hour of Thamel. The perfect Nepal MTB introduction for intermediate riders.",
     heroImage:
-      "https://images.unsplash.com/photo-1594819047050-99defca82545?w=2000&q=85",
+      "https://nepalitimes.com/cdn-cgi/image/w=2400,h=1350/https://media.nepalitimes.com/1/feature_images/20230331200320_adc73ec2c37f59a4cf922c1f3d59c8f72267944b355e5abfea0e6bc9dca5707c.jpg",
     galleryImages: [
       {
         src: "https://images.unsplash.com/photo-1594819047050-99defca82545?w=1200&q=80",
@@ -2574,7 +2574,7 @@ export const packages: Package[] = [
     tagline:
       "Ride to Sarangkot for the iconic Annapurna sunrise, then bomb flowing singletrack down to Phewa Lake in time for lakeside breakfast. Nepal MTB's perfect day out.",
     heroImage:
-      "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=2000&q=85",
+      "https://backend.nepalmountainbike.com/media/file-uploads/blogs/media/Sarangkot-sunrise-Mtb-tour-in-Pokhara.jpg",
     galleryImages: [
       {
         src: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=1200&q=80",
@@ -2740,7 +2740,8 @@ export const packages: Package[] = [
     tagline:
       "Same legendary trails, more vertical, less suffering. Bosch-powered e-MTBs take you to Poon Hill (3,210m) for Nepal's greatest sunrise — then you ride every descent fully charged.",
     heroImage:
-      "https://images.unsplash.com/photo-1520637736862-4d197d17c93a?w=2000&q=85",
+      "https://www.nepalmountainbike.com/_next/image?url=https%3A%2F%2Fbackend.nepalmountainbike.com%2Fmedia%2Ffile-uploads%2Fblogs%2Fmain_image%2F1775197749-Annapurna-circuit-mountain-bike-tour.jpg&w=3840&q=75",
+
     galleryImages: [
       {
         src: "https://images.unsplash.com/photo-1520637736862-4d197d17c93a?w=1200&q=80",
