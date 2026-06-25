@@ -50,7 +50,7 @@ export default function HomeHero() {
       }}
     >
       {/* BG */}
-      <div
+      {/* <div
         id="hero-bg"
         style={{
           position: "absolute",
@@ -68,6 +68,36 @@ export default function HomeHero() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           zIndex: -1,
+        }}
+      /> */}
+
+      {/* Background Video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: -1,
+        }}
+      >
+        <source src="/videobg.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark Overlay */}
+      <div
+        id="hero-bg"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(to top, rgba(26,18,8,0.95) 0%, rgba(26,18,8,0.3) 50%, rgba(26,18,8,0.1) 100%)",
+          zIndex: 0,
         }}
       />
 
