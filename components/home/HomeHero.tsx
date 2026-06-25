@@ -28,7 +28,7 @@ export default function HomeHero() {
       )
       .from(scrollRef.current, { opacity: 0, duration: 0.5 }, "-=0.2");
 
-    // Parallax bg
+    // Parallax background processing
     const bgEl = document.getElementById("hero-bg");
     const onScroll = () => {
       if (bgEl) bgEl.style.transform = `translateY(${window.scrollY * 0.25}px)`;
@@ -38,276 +38,131 @@ export default function HomeHero() {
   }, []);
 
   return (
-    <section
-      style={{
-        height: "100vh",
-        minHeight: 700,
-        position: "relative",
-        display: "flex",
-        alignItems: "flex-end",
-        padding: "0 3rem 6rem",
-        overflow: "hidden",
-      }}
-    >
-      {/* BG */}
-      {/* <div
-        id="hero-bg"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to top, rgba(26,18,8,0.95) 0%, rgba(26,18,8,0.3) 50%, rgba(26,18,8,0.1) 100%)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=2000&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          zIndex: -1,
-        }}
-      /> */}
-
-      {/* Background Video */}
+    <section className="relative min-h-[700px] h-screen w-full flex items-end justify-center px-6 pb-24 md:px-12 md:pb-24 lg:pb-28 overflow-hidden bg-[#1a1208]">
+      {/* Background Video Stream */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: -1,
-        }}
+        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
       >
         <source src="/videobg.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark Overlay */}
+      {/* Parallax Gradient Shade Mask Layer */}
       <div
         id="hero-bg"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to top, rgba(26,18,8,0.95) 0%, rgba(26,18,8,0.3) 50%, rgba(26,18,8,0.1) 100%)",
-          zIndex: 0,
-        }}
+        className="absolute inset-0 bg-gradient-to-t from-[#1a1208]/95 via-[#1a1208]/40 to-[#1a1208]/10 z-10 pointer-events-none transition-transform duration-75 will-change-transform"
       />
 
-      {/* Content */}
-      <div style={{ position: "relative", zIndex: 2, maxWidth: 800 }}>
-        <div
-          ref={eyebrowRef}
-          style={{
-            fontSize: "0.75rem",
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            color: "var(--saffron)",
-            marginBottom: "1.2rem",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.8rem",
-          }}
-        >
-          <span
-            style={{
-              display: "block",
-              width: "2rem",
-              height: "1px",
-              background: "var(--saffron)",
-            }}
-          />
-          Kathmandu, Nepal · Est. 2006
-        </div>
-
-        <h1
-          ref={titleRef}
-          style={{
-            fontFamily: "'Syne', sans-serif",
-            fontSize: "clamp(3rem, 6vw, 6.5rem)",
-            fontWeight: 800,
-            lineHeight: 0.92,
-            letterSpacing: "-0.04em",
-            marginBottom: "1.8rem",
-            width: "min(100%, 28ch)",
-          }}
-        >
-          Where the
-          <br />
-          <em style={{ color: "var(--saffron)", fontStyle: "normal" }}>
-            Earth
-          </em>
-          <br />
-          Touches Sky
-        </h1>
-
-        <p
-          ref={subtitleRef}
-          style={{
-            fontSize: "1.05rem",
-            lineHeight: 1.65,
-            color: "rgba(245,242,236,0.65)",
-            maxWidth: 480,
-            marginBottom: "3rem",
-          }}
-        >
-          Expert-guided trekking and mountain biking across the world's greatest
-          Himalayan terrain. From Everest Base Camp to high-altitude MTB
-          descents in Mustang.
-        </p>
-
-        <div
-          ref={actionsRef}
-          style={{
-            display: "flex",
-            gap: "1rem",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <a
-            href="#packages"
-            style={{
-              background: "var(--saffron)",
-              color: "var(--earth)",
-              padding: "0.95rem 2.2rem",
-              fontFamily: "'Syne', sans-serif",
-              fontWeight: 700,
-              fontSize: "0.85rem",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              borderRadius: "2px",
-              transition: "transform 0.2s, background 0.2s",
-              display: "inline-block",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.transform =
-                "translateY(-2px)";
-              (e.currentTarget as HTMLAnchorElement).style.background =
-                "#f5a02e";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.transform =
-                "translateY(0)";
-              (e.currentTarget as HTMLAnchorElement).style.background =
-                "var(--saffron)";
-            }}
+      {/* Global Boundary Max-Width Container Row */}
+      <div className="relative z-20 w-full max-w-[1400px] mx-auto flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12">
+        {/* Core Left-Wing Content Panel */}
+        <div className="max-w-[800px] w-full">
+          {/* Eyebrow Label */}
+          <div
+            ref={eyebrowRef}
+            className="text-[0.75rem] font-semibold tracking-[0.25em] uppercase text-[var(--saffron)] mb-5 flex items-center gap-3"
           >
-            Explore Packages
-          </a>
-          <a
-            href="#about"
-            style={{
-              color: "var(--snow)",
-              border: "1px solid rgba(245,242,236,0.35)",
-              padding: "0.95rem 2.2rem",
-              fontSize: "0.85rem",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              borderRadius: "2px",
-              transition: "border-color 0.2s",
-              display: "inline-block",
-            }}
-          >
-            Our Story
-          </a>
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div
-        ref={statsRef}
-        style={{
-          position: "absolute",
-          right: "3rem",
-          bottom: "6rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "2rem",
-          zIndex: 2,
-        }}
-      >
-        {[
-          { num: "200+", label: "Routes" },
-          { num: "18", label: "Years" },
-          { num: "4,800+", label: "Adventurers" },
-        ].map((s) => (
-          <div key={s.label} style={{ textAlign: "right" }}>
-            <div
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: "2.2rem",
-                fontWeight: 800,
-                color: "var(--snow)",
-                lineHeight: 1,
-              }}
-            >
-              {s.num}
-            </div>
-            <div
-              style={{
-                fontSize: "0.7rem",
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: "var(--mist)",
-              }}
-            >
-              {s.label}
-            </div>
+            <span className="block w-8 h-[1px] bg-[var(--saffron)]" />
+            Kathmandu, Nepal · Est. 2006
           </div>
-        ))}
+
+          {/* Epic Main Header Title */}
+          <h1
+            ref={titleRef}
+            className="font-['Syne'] text-[clamp(2.8rem,5.5vw,6rem)] font-extrabold leading-[0.92] tracking-tighter text-white mb-6 max-w-[28ch]"
+          >
+            Where the
+            <br />
+            <span className="text-[var(--saffron)] font-normal not-italic">
+              Earth
+            </span>
+            <br />
+            Touches Sky
+          </h1>
+
+          {/* Subtitle Paragraph */}
+          <p
+            ref={subtitleRef}
+            className="text-[0.95rem] md:text-[1.05rem] leading-relaxed text-[#FAF7F2]/65 max-w-lg mb-10"
+          >
+            Expert-guided trekking and mountain biking across the world's
+            greatest Himalayan terrain. From Everest Base Camp to high-altitude
+            MTB descents in Mustang.
+          </p>
+
+          {/* Action Trigger Buttons Group */}
+          <div ref={actionsRef} className="flex flex-wrap items-center gap-4">
+            <a
+              href="#packages"
+              className="bg-[var(--saffron)] text-[var(--earth)] px-8 py-4 font-['Syne'] font-bold text-[0.85rem] tracking-wider uppercase rounded-[2px] transition-all duration-200 transform hover:-translate-y-0.5 hover:bg-[#f5a02e] inline-block"
+            >
+              Explore Packages
+            </a>
+            <a
+              href="#about"
+              className="text-white border border-[#FAF7F2]/35 px-8 py-4 font-['Syne'] font-bold text-[0.85rem] tracking-wider uppercase rounded-[2px] transition-colors duration-200 hover:bg-white/10 inline-block"
+            >
+              Our Story
+            </a>
+          </div>
+        </div>
+
+        {/* Dynamic Metric Counter Sidebar Block */}
+        <div
+          ref={statsRef}
+          className="flex flex-row lg:flex-col gap-8 lg:gap-8 justify-start lg:justify-end border-t border-white/10 lg:border-t-0 pt-6 lg:pt-0 w-full lg:w-auto min-w-[160px]"
+        >
+          {[
+            { num: "200+", label: "Routes" },
+            { num: "18", label: "Years" },
+            { num: "4,800+", label: "Adventurers" },
+          ].map((s) => (
+            <div
+              key={s.label}
+              className="text-left lg:text-right flex-1 lg:flex-initial"
+            >
+              <div className="font-['Syne'] text-2xl md:text-3xl lg:text-[2.2rem] font-extrabold text-white leading-none mb-1">
+                {s.num}
+              </div>
+              <div className="text-[0.65rem] md:text-[0.7rem] tracking-[0.15em] uppercase text-stone-400 font-medium">
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Scroll hint */}
+      {/* Downward Scroll Tracker Prompt */}
       <div
         ref={scrollRef}
-        style={{
-          position: "absolute",
-          bottom: "2rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.5rem",
-          fontSize: "0.68rem",
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: "rgba(245,242,236,0.4)",
-          zIndex: 2,
-        }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[0.68rem] tracking-[0.2em] uppercase text-[#FAF7F2]/40 z-20 pointer-events-none"
       >
-        <div
-          style={{
-            width: 1,
-            height: 50,
-            background: "rgba(245,242,236,0.15)",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              background: "var(--saffron)",
-              height: "100%",
-              animation: "scrollline 2s ease-in-out infinite",
-            }}
-          />
+        <div className="w-[1px] h-12 bg-white/15 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 bg-[var(--saffron)] h-full animate-pulse-line" />
         </div>
-        Scroll
+        <span>Scroll</span>
       </div>
+
+      {/* Custom Keyframe Styles Injection */}
+      <style jsx global>{`
+        @keyframes scrollline {
+          0% {
+            transform: translateY(-100%);
+          }
+          50% {
+            transform: translateY(0);
+          }
+          100% {
+            transform: translateY(100%);
+          }
+        }
+        .animate-pulse-line {
+          animation: scrollline 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+      `}</style>
     </section>
   );
 }

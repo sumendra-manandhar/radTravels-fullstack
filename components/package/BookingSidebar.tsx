@@ -4,7 +4,9 @@ import { Package } from "@/data/packages";
 
 export default function BookingSidebar({ pkg }: { pkg: Package }) {
   const [people, setPeople] = useState("2 people");
-  const [pkgTier, setPkgTier] = useState<"standard" | "premium" | "gold">("standard");
+  const [pkgTier, setPkgTier] = useState<"standard" | "premium" | "gold">(
+    "standard",
+  );
 
   const prices = {
     standard: pkg.priceFrom,
@@ -15,242 +17,140 @@ export default function BookingSidebar({ pkg }: { pkg: Package }) {
   const price = prices[pkgTier];
 
   return (
-    <div style={{ position: "sticky", top: 100 }}>
-      {/* Booking Card */}
+    <div className="w-full space-y-6 lg:sticky lg:top-24">
+      {/* ==========================================
+          1. PRIMARY BOOKING CONVERSION CARD
+         ========================================== */}
       <div
         id="book"
-        style={{
-          background: "rgba(245,242,236,0.05)",
-          border: "1px solid var(--border)",
-          borderRadius: "8px",
-          overflow: "hidden",
-          marginBottom: "1.5rem",
-        }}
+        className="w-full bg-stone-50 dark:bg-white/[0.02] border border-stone-200 dark:border-white/10 rounded-lg overflow-hidden shadow-sm"
       >
-        {/* Price header */}
-        <div
-          style={{
-            background: "var(--pine)",
-            padding: "1.8rem",
-            textAlign: "center",
-            borderBottom: "1px solid var(--border)",
-          }}
-        >
-          <div style={{ fontSize: "0.7rem", color: "var(--mist)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+        {/* Dynamic Pricing Header Frame */}
+        <div className="bg-[#1c2420] p-6 md:p-8 text-center border-b border-stone-200 dark:border-white/10">
+          <div className="text-[0.7rem] text-stone-300 dark:text-stone-400 font-bold tracking-[0.15em] uppercase">
             Starting from
           </div>
-          <div
-            style={{
-              fontFamily: "'Syne', sans-serif",
-              fontWeight: 800,
-              fontSize: "2.8rem",
-              color: "var(--saffron)",
-              lineHeight: 1,
-              margin: "0.3rem 0",
-            }}
-          >
+          <div className="font-['Syne'] font-extrabold text-4xl md:text-5xl text-[var(--saffron)] my-1.5 leading-none tracking-tighter">
             ${price.toLocaleString()}
           </div>
-          <div style={{ fontSize: "0.75rem", color: "rgba(245,242,236,0.5)" }}>per person · all-inclusive</div>
+          <div className="text-[0.75rem] text-white/50">
+            per person · all-inclusive
+          </div>
         </div>
 
-        {/* Form */}
-        <div style={{ padding: "1.5rem" }}>
-          {/* Departure date */}
-          <div style={{ marginBottom: "1rem" }}>
-            <label
-              style={{
-                display: "block",
-                fontSize: "0.72rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--mist)",
-                marginBottom: "0.4rem",
-              }}
-            >
+        {/* Transaction Parameters Form Field */}
+        <div className="p-6 space-y-5">
+          {/* Departure Date Calendar Picker */}
+          <div>
+            <label className="block text-[0.72rem] font-bold tracking-[0.1em] uppercase text-stone-500 dark:text-stone-400 mb-2">
               Departure Date
             </label>
             <input
               type="date"
-              style={{
-                width: "100%",
-                padding: "0.75rem 1rem",
-                background: "rgba(245,242,236,0.06)",
-                border: "1px solid var(--border)",
-                color: "var(--snow)",
-                borderRadius: "3px",
-                fontSize: "0.88rem",
-                fontFamily: "'Inter', sans-serif",
-                outline: "none",
-                colorScheme: "dark",
-              }}
+              className="w-full px-4 py-3 bg-white dark:bg-white/[0.04] border border-stone-200 dark:border-white/10 rounded text-stone-800 dark:text-white text-[0.88rem] outline-none transition focus:border-[var(--saffron)] color-scheme-light dark:color-scheme-dark"
             />
           </div>
 
-          {/* People */}
-          <div style={{ marginBottom: "1rem" }}>
-            <label
-              style={{
-                display: "block",
-                fontSize: "0.72rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--mist)",
-                marginBottom: "0.4rem",
-              }}
-            >
+          {/* Pax Metric Dropdown Selector */}
+          <div>
+            <label className="block text-[0.72rem] font-bold tracking-[0.1em] uppercase text-stone-500 dark:text-stone-400 mb-2">
               Number of People
             </label>
-            <select
-              value={people}
-              onChange={(e) => setPeople(e.target.value)}
-              style={{
-                width: "100%",
-                padding: "0.75rem 1rem",
-                background: "rgba(245,242,236,0.06)",
-                border: "1px solid var(--border)",
-                color: "var(--snow)",
-                borderRadius: "3px",
-                fontSize: "0.88rem",
-                fontFamily: "'Inter', sans-serif",
-                outline: "none",
-                appearance: "none",
-              }}
-            >
-              {["1 person (solo)", "2 people", "3–5 people", "6–10 people", "Private group (10+)"].map((o) => (
-                <option key={o} value={o} style={{ background: "var(--earth)" }}>
-                  {o}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Package tier */}
-          <div style={{ marginBottom: "1.2rem" }}>
-            <label
-              style={{
-                display: "block",
-                fontSize: "0.72rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--mist)",
-                marginBottom: "0.4rem",
-              }}
-            >
-              Package Type
-            </label>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-              {(["standard", "premium", "gold"] as const).map((tier) => (
-                <div
-                  key={tier}
-                  onClick={() => setPkgTier(tier)}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "0.6rem 0.9rem",
-                    borderRadius: "3px",
-                    border: `1px solid ${pkgTier === tier ? "var(--saffron)" : "var(--border)"}`,
-                    background: pkgTier === tier ? "rgba(232,135,10,0.08)" : "transparent",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                  }}
+            <div className="relative">
+              <select
+                value={people}
+                onChange={(e) => setPeople(e.target.value)}
+                className="w-full px-4 py-3 bg-white dark:bg-white/[0.04] border border-stone-200 dark:border-white/10 rounded text-stone-800 dark:text-white text-[0.88rem] outline-none appearance-none transition focus:border-[var(--saffron)] cursor-pointer"
+              >
+                {[
+                  "1 person (solo)",
+                  "2 people",
+                  "3–5 people",
+                  "6–10 people",
+                  "Private group (10+)",
+                ].map((o) => (
+                  <option
+                    key={o}
+                    value={o}
+                    className="bg-white dark:bg-[#1a1208] text-stone-800 dark:text-white"
+                  >
+                    {o}
+                  </option>
+                ))}
+              </select>
+              {/* Native Dropdown Custom Arrow Accent */}
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-stone-400">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
                 >
-                  <span
-                    style={{
-                      fontSize: "0.82rem",
-                      textTransform: "capitalize",
-                      fontWeight: pkgTier === tier ? 600 : 400,
-                      color: pkgTier === tier ? "var(--snow)" : "rgba(245,242,236,0.6)",
-                    }}
-                  >
-                    {tier === "gold" ? "Gold (Private)" : tier.charAt(0).toUpperCase() + tier.slice(1)}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Syne', sans-serif",
-                      fontWeight: 700,
-                      color: pkgTier === tier ? "var(--saffron)" : "var(--mist)",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    ${prices[tier].toLocaleString()}
-                  </span>
-                </div>
-              ))}
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
             </div>
           </div>
 
-          <button
-            style={{
-              display: "block",
-              width: "100%",
-              padding: "1rem",
-              background: "var(--saffron)",
-              color: "var(--earth)",
-              fontFamily: "'Syne', sans-serif",
-              fontWeight: 800,
-              fontSize: "0.9rem",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              border: "none",
-              borderRadius: "3px",
-              cursor: "pointer",
-              marginBottom: "0.7rem",
-              transition: "background 0.2s",
-            }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "#f5a02e")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--saffron)")}
-          >
-            Book This Trip
-          </button>
+          {/* Tier Configuration Selector Array */}
+          <div>
+            <label className="block text-[0.72rem] font-bold tracking-[0.1em] uppercase text-stone-500 dark:text-stone-400 mb-2">
+              Package Type
+            </label>
+            <div className="flex flex-col gap-2">
+              {(["standard", "premium", "gold"] as const).map((tier) => {
+                const isActive = pkgTier === tier;
+                return (
+                  <div
+                    key={tier}
+                    onClick={() => setPkgTier(tier)}
+                    className={`flex justify-between items-center px-4 py-3 rounded border cursor-pointer transition-all duration-200 ${
+                      isActive
+                        ? "border-[var(--saffron)] bg-[var(--saffron)]/[0.08]"
+                        : "border-stone-200 dark:border-white/10 bg-transparent hover:bg-stone-100 dark:hover:bg-white/[0.01]"
+                    }`}
+                  >
+                    <span
+                      className={`text-[0.82rem] capitalize ${isActive ? "font-bold text-stone-900 dark:text-white" : "text-stone-600 dark:text-stone-400"}`}
+                    >
+                      {tier === "gold" ? "Gold (Private)" : tier}
+                    </span>
+                    <span
+                      className={`font-['Syne'] font-bold text-[0.9rem] ${isActive ? "text-[var(--saffron)]" : "text-stone-500 dark:text-stone-400"}`}
+                    >
+                      ${prices[tier].toLocaleString()}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
-          <button
-            style={{
-              display: "block",
-              width: "100%",
-              padding: "0.85rem",
-              background: "transparent",
-              color: "var(--snow)",
-              fontFamily: "'Syne', sans-serif",
-              fontWeight: 600,
-              fontSize: "0.82rem",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              border: "1px solid var(--border)",
-              borderRadius: "3px",
-              cursor: "pointer",
-            }}
-          >
-            📧 Request Custom Quote
-          </button>
+          {/* Primary & Secondary Call To Actions */}
+          <div className="space-y-2 pt-2">
+            <button className="w-full py-3.5 bg-[var(--saffron)] hover:bg-[#f5a02e] text-[#1a1208] font-['Syne'] font-extrabold text-[0.9rem] tracking-wider uppercase rounded transition-colors duration-200 shadow-sm active:scale-[0.99]">
+              Book This Trip
+            </button>
 
-          <div
-            style={{
-              paddingTop: "1rem",
-              borderTop: "1px solid var(--border)",
-              marginTop: "1rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.45rem",
-            }}
-          >
+            <button className="w-full py-3 bg-transparent hover:bg-stone-100 dark:hover:bg-white/[0.03] text-stone-800 dark:text-white font-['Syne'] font-semibold text-[0.82rem] tracking-wider uppercase rounded border border-stone-200 dark:border-white/10 transition-colors">
+              📧 Request Custom Quote
+            </button>
+          </div>
+
+          {/* Secure Trust Indicators Pillar */}
+          <div className="pt-4 border-t border-stone-200 dark:border-white/10 space-y-2">
             {[
               { icon: "✅", text: "Free cancellation up to 30 days before" },
-              { icon: "🔒", text: "Secure booking · No payment until confirmed" },
+              {
+                icon: "🔒",
+                text: "Secure booking · No payment until confirmed",
+              },
               { icon: "📞", text: "24/7 support on WhatsApp" },
-            ].map((r) => (
+            ].map((r, idx) => (
               <div
-                key={r.icon}
-                style={{
-                  display: "flex",
-                  gap: "0.55rem",
-                  alignItems: "flex-start",
-                  fontSize: "0.77rem",
-                  color: "rgba(245,242,236,0.5)",
-                }}
+                key={idx}
+                className="flex gap-2.5 items-start text-[0.77rem] text-stone-500 dark:text-stone-400/80 leading-tight"
               >
-                <span>{r.icon}</span>
+                <span className="shrink-0">{r.icon}</span>
                 <span>{r.text}</span>
               </div>
             ))}
@@ -258,119 +158,82 @@ export default function BookingSidebar({ pkg }: { pkg: Package }) {
         </div>
       </div>
 
-      {/* Trip Facts */}
-      <div
-        style={{
-          background: "var(--card-bg)",
-          border: "1px solid var(--border)",
-          borderRadius: "8px",
-          padding: "1.5rem",
-          marginBottom: "1.5rem",
-        }}
-      >
-        <h4
-          style={{
-            fontFamily: "'Syne', sans-serif",
-            fontWeight: 700,
-            fontSize: "0.75rem",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "var(--mist)",
-            marginBottom: "1.2rem",
-          }}
-        >
+      {/* ==========================================
+          2. HARD FACTS SPECIFICATION TABLE
+         ========================================== */}
+      <div className="w-full bg-white dark:bg-white/[0.02] border border-stone-200 dark:border-white/10 rounded-lg p-5 md:p-6 shadow-sm">
+        <h4 className="font-['Syne'] font-bold text-[0.75rem] tracking-[0.15em] uppercase text-stone-500 dark:text-stone-400 mb-4">
           Trip Facts
         </h4>
-        {[
-          { key: "Start / End", val: pkg.startEnd },
-          { key: "Trail Start", val: pkg.trailStart },
-          { key: "Highest Point", val: pkg.maxAltitude, highlight: true },
-          { key: "Accommodation", val: pkg.accommodation },
-          { key: "Meals", val: pkg.meals },
-          { key: "Group Size", val: pkg.groupSize },
-          { key: "Guide Ratio", val: pkg.guideRatio },
-          { key: "Permits", val: pkg.permits },
-        ].map((row) => (
-          <div
-            key={row.key}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "0.55rem 0",
-              borderBottom: "1px solid rgba(245,242,236,0.05)",
-              fontSize: "0.82rem",
-            }}
-          >
-            <span style={{ color: "rgba(245,242,236,0.5)" }}>{row.key}</span>
-            <span style={{ fontWeight: 500, textAlign: "right", color: row.highlight ? "var(--saffron)" : "var(--snow)", maxWidth: "55%" }}>
-              {row.val}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* Best months */}
-      <div
-        style={{
-          background: "var(--card-bg)",
-          border: "1px solid var(--border)",
-          borderRadius: "8px",
-          padding: "1.5rem",
-        }}
-      >
-        <h4
-          style={{
-            fontFamily: "'Syne', sans-serif",
-            fontWeight: 700,
-            fontSize: "0.75rem",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "var(--mist)",
-            marginBottom: "1.2rem",
-          }}
-        >
-          Best Months
-        </h4>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.4rem" }}>
-          {pkg.bestMonths.map((m) => (
+        <div className="divide-y divide-stone-100 dark:divide-white/[0.04]">
+          {[
+            { key: "Start / End", val: pkg.startEnd },
+            { key: "Trail Start", val: pkg.trailStart },
+            { key: "Highest Point", val: pkg.maxAltitude, highlight: true },
+            { key: "Accommodation", val: pkg.accommodation },
+            { key: "Meals", val: pkg.meals },
+            { key: "Group Size", val: pkg.groupSize },
+            { key: "Guide Ratio", val: pkg.guideRatio },
+            { key: "Permits", val: pkg.permits },
+          ].map((row) => (
             <div
-              key={m.month}
-              style={{
-                textAlign: "center",
-                padding: "0.5rem 0.2rem",
-                borderRadius: "3px",
-                fontSize: "0.67rem",
-                fontWeight: 500,
-                background:
-                  m.status === "best"
-                    ? "rgba(232,135,10,0.18)"
-                    : m.status === "ok"
-                    ? "rgba(200,221,232,0.1)"
-                    : "rgba(245,242,236,0.03)",
-                color:
-                  m.status === "best"
-                    ? "var(--saffron)"
-                    : m.status === "ok"
-                    ? "var(--ice)"
-                    : "rgba(245,242,236,0.3)",
-                border: `1px solid ${
-                  m.status === "best"
-                    ? "rgba(232,135,10,0.3)"
-                    : m.status === "ok"
-                    ? "rgba(200,221,232,0.2)"
-                    : "var(--border)"
-                }`,
-              }}
+              key={row.key}
+              className="flex justify-between items-center py-2.5 text-[0.82rem]"
             >
-              {m.month}
+              <span className="text-stone-500 dark:text-stone-400">
+                {row.key}
+              </span>
+              <span
+                className={`font-medium text-right max-w-[55%] truncate ${row.highlight ? "text-[var(--saffron)] font-bold" : "text-stone-800 dark:text-stone-200"}`}
+              >
+                {row.val}
+              </span>
             </div>
           ))}
         </div>
-        <div style={{ display: "flex", gap: "1rem", marginTop: "1rem", fontSize: "0.72rem" }}>
-          <span style={{ color: "var(--saffron)" }}>■ Best</span>
-          <span style={{ color: "var(--ice)" }}>■ Good</span>
-          <span style={{ color: "rgba(245,242,236,0.25)" }}>■ Avoid</span>
+      </div>
+
+      {/* ==========================================
+          3. CLIMATOLOGY SEASONAL GRAPH RATINGS
+         ========================================== */}
+      <div className="w-full bg-white dark:bg-white/[0.02] border border-stone-200 dark:border-white/10 rounded-lg p-5 md:p-6 shadow-sm">
+        <h4 className="font-['Syne'] font-bold text-[0.75rem] tracking-[0.15em] uppercase text-stone-500 dark:text-stone-400 mb-4">
+          Best Months
+        </h4>
+
+        {/* Twelve Month Matrix Container Block */}
+        <div className="grid grid-cols-4 gap-1.5">
+          {pkg.bestMonths.map((m) => {
+            const isBest = m.status === "best";
+            const isOk = m.status === "ok";
+            return (
+              <div
+                key={m.month}
+                className={`text-center py-2 rounded text-[0.67rem] font-bold border tracking-wide transition-colors ${
+                  isBest
+                    ? "bg-[var(--saffron)]/[0.15] text-[var(--saffron)] border-[var(--saffron)]/30"
+                    : isOk
+                      ? "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20"
+                      : "bg-stone-50 dark:bg-white/[0.02] text-stone-400 dark:text-stone-600 border-stone-200 dark:border-white/5"
+                }`}
+              >
+                {m.month}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Legend Mapping Index Indicator Row */}
+        <div className="flex gap-4 mt-4 text-[0.72rem] font-medium border-t border-stone-100 dark:border-white/[0.04] pt-3">
+          <span className="text-[var(--saffron)] flex items-center gap-1">
+            ■ Best
+          </span>
+          <span className="text-sky-600 dark:text-sky-400 flex items-center gap-1">
+            ■ Good
+          </span>
+          <span className="text-stone-400 dark:text-stone-600 flex items-center gap-1">
+            ■ Avoid
+          </span>
         </div>
       </div>
     </div>

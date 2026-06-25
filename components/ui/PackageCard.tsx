@@ -6,137 +6,62 @@ export default function PackageCard({ pkg }: { pkg: Package }) {
   return (
     <Link
       href={`/packages/${pkg.slug}`}
-      style={{ textDecoration: "none", color: "inherit", display: "block" }}
+      className="no-underline text-inherit block group"
     >
-      <div
-        style={{
-          background: "var(--card-bg)",
-          border: "1px solid var(--border)",
-          borderRadius: "6px",
-          overflow: "hidden",
-          transition: "transform 0.3s, border-color 0.3s",
-          cursor: "pointer",
-          height: "100%",
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLDivElement).style.transform = "translateY(-6px)";
-          (e.currentTarget as HTMLDivElement).style.borderColor = "var(--saffron)";
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-          (e.currentTarget as HTMLDivElement).style.borderColor = "var(--border)";
-        }}
-      >
-        {/* Image */}
-        <div style={{ height: 220, overflow: "hidden", position: "relative" }}>
+      <div className="h-full bg-[var(--card-bg)] border border-stone-200 dark:border-[var(--border)] rounded-md overflow-hidden cursor-pointer shadow-sm dark:shadow-none transition-all duration-300 transform translate-y-0 hover:-translate-y-2 hover:border-[var(--saffron)] dark:hover:border-[var(--saffron)] flex flex-col">
+        {/* Card Image Wrap */}
+        <div className="h-56 overflow-hidden relative w-full">
           <img
             src={pkg.heroImage}
             alt={pkg.name}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              transition: "transform 0.5s",
-              display: "block",
-            }}
-            onMouseEnter={(e) => ((e.target as HTMLImageElement).style.transform = "scale(1.06)")}
-            onMouseLeave={(e) => ((e.target as HTMLImageElement).style.transform = "scale(1)")}
+            className="w-full h-full object-cover transition-transform duration-500 transform scale-100 group-hover:scale-105 block"
           />
+          {/* Difficulty Badge */}
           <span
-            className={difficultyColor[pkg.difficulty]}
-            style={{
-              position: "absolute",
-              top: "1rem",
-              left: "1rem",
-              color: "#fff",
-              fontFamily: "'Syne', sans-serif",
-              fontWeight: 700,
-              fontSize: "0.65rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "0.3rem 0.7rem",
-              borderRadius: "2px",
-            }}
+            className={`${difficultyColor[pkg.difficulty]} absolute top-4 left-4 text-white font-['Syne'] font-bold text-[0.65rem] tracking-[0.12em] uppercase px-2.5 py-1.5 rounded-[2px] shadow-sm`}
           >
             {pkg.difficulty}
           </span>
         </div>
 
-        {/* Body */}
-        <div style={{ padding: "1.4rem" }}>
-          <div
-            style={{
-              display: "flex",
-              gap: "1rem",
-              marginBottom: "0.7rem",
-              fontSize: "0.72rem",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "var(--mist)",
-            }}
-          >
-            <span>📅 {pkg.duration}</span>
-            <span>🏔️ {pkg.maxAltitude}</span>
-            <span>👥 {pkg.groupSize}</span>
+        {/* Card Content Body */}
+        <div className="p-6 flex flex-col flex-grow justify-between">
+          <div>
+            {/* Quick Specs Metadata */}
+            <div className="flex flex-wrap items-center gap-4 mb-3 text-[0.72rem] tracking-wider uppercase font-medium text-stone-500 dark:text-[var(--mist)]">
+              <span className="flex items-center gap-1">📅 {pkg.duration}</span>
+              <span className="flex items-center gap-1">
+                🏔️ {pkg.maxAltitude}
+              </span>
+              <span className="flex items-center gap-1">
+                👥 {pkg.groupSize}
+              </span>
+            </div>
+
+            {/* Trip Title */}
+            <h3 className="font-['Syne'] font-bold text-[1.15rem] leading-snug mb-2 text-[var(--earth)] dark:text-[var(--snow)]">
+              {pkg.name}
+            </h3>
+
+            {/* Clamped Snippet/Tagline */}
+            <p className="text-[0.83rem]确 leading-relaxed text-stone-600 dark:text-stone-400 mb-5 line-clamp-3">
+              {pkg.tagline}
+            </p>
           </div>
 
-          <h3
-            style={{
-              fontFamily: "'Syne', sans-serif",
-              fontWeight: 700,
-              fontSize: "1.15rem",
-              marginBottom: "0.5rem",
-              lineHeight: 1.2,
-            }}
-          >
-            {pkg.name}
-          </h3>
-
-          <p
-            style={{
-              fontSize: "0.83rem",
-              lineHeight: 1.6,
-              color: "rgba(245,242,236,0.55)",
-              marginBottom: "1.2rem",
-              display: "-webkit-box",
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-            }}
-          >
-            {pkg.tagline}
-          </p>
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingTop: "1rem",
-              borderTop: "1px solid var(--border)",
-            }}
-          >
+          {/* Pricing & CTA Wing Footer */}
+          <div className="flex items-center justify-between pt-4 border-t border-stone-200 dark:border-[var(--border)] mt-auto">
             <div>
-              <span style={{ fontSize: "0.68rem", color: "var(--mist)", display: "block" }}>From</span>
-              <span
-                style={{
-                  fontFamily: "'Syne', sans-serif",
-                  fontWeight: 800,
-                  fontSize: "1.35rem",
-                  color: "var(--saffron)",
-                }}
-              >
+              <span className="text-[0.68rem] font-medium uppercase tracking-wider text-stone-400 dark:text-[var(--mist)] block">
+                From
+              </span>
+              <span className="font-['Syne'] font-extrabold text-[1.35rem] text-[var(--saffron)]">
                 ${pkg.priceFrom.toLocaleString()}
               </span>
             </div>
-            <span
-              style={{
-                fontSize: "0.75rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--snow)",
-              }}
-            >
+
+            {/* Context Interactive Label */}
+            <span className="text-[0.75rem] tracking-widest uppercase font-bold font-['Syne'] text-[var(--earth)] dark:text-[var(--snow)] group-hover:text-[var(--saffron)] dark:group-hover:text-[var(--saffron)] transition-colors duration-200">
               View Trip →
             </span>
           </div>

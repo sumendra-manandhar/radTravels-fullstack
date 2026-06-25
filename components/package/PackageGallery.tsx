@@ -9,106 +9,73 @@ interface GalleryImage {
 export default function PackageGallery({ images }: { images: GalleryImage[] }) {
   const [lightbox, setLightbox] = useState<string | null>(null);
 
-  const gridAreas = ["1/1/2/3", "1/3/2/4", "2/1/3/2", "2/2/3/3", "2/3/3/4"];
-  const aspectRatios = ["unset", "unset", "4/3", "4/3", "4/3"];
+  // Responsive layout mapping arrays using native Tailwind grid configuration mechanics
+  const desktopGridStyles = [
+    "md:col-span-2 md:row-span-1 md:aspect-video", // Image 1 (Hero Large Landscape)
+    "md:col-span-1 md:row-span-1 md:aspect-[3/4]", // Image 2 (Right Vertical Stack Accent)
+    "md:col-span-1 md:aspect-[4/3]", // Image 3 (Bottom Left Box)
+    "md:col-span-1 md:aspect-[4/3]", // Image 4 (Bottom Center Box)
+    "md:col-span-1 md:aspect-[4/3]", // Image 5 (Bottom Right Box)
+  ];
 
   return (
     <>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "0.6rem",
-        }}
-      >
+      {/* ==========================================
+          EDITORIAL COMPOSITE PHOTO GRID
+         ========================================== */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 w-full">
         {images.slice(0, 5).map((img, i) => (
           <div
             key={i}
             onClick={() => setLightbox(img.src)}
-            style={{
-              gridArea: gridAreas[i] || "auto",
-              aspectRatio: i < 2 ? (i === 0 ? "16/9" : "3/4") : aspectRatios[i],
-              overflow: "hidden",
-              borderRadius: "4px",
-              position: "relative",
-              cursor: "zoom-in",
-            }}
+            className={`group overflow-hidden rounded relative cursor-zoom-in aspect-video md:aspect-auto ${
+              desktopGridStyles[i] || ""
+            }`}
           >
+            {/* Asset Node Frame */}
             <img
               src={img.src}
               alt={img.caption}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                transition: "transform 0.5s ease",
-                display: "block",
-              }}
-              onMouseEnter={(e) => ((e.target as HTMLImageElement).style.transform = "scale(1.05)")}
-              onMouseLeave={(e) => ((e.target as HTMLImageElement).style.transform = "scale(1)")}
+              className="w-full h-full object-cover block transition-transform duration-500 ease-out group-hover:scale-105"
+              loading="lazy"
             />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "linear-gradient(to top, rgba(26,18,8,0.55) 0%, transparent 50%)",
-                display: "flex",
-                alignItems: "flex-end",
-                padding: "0.8rem",
-                opacity: 0,
-                transition: "opacity 0.3s",
-              }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.opacity = "1")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.opacity = "0")}
-            >
-              <span style={{ fontSize: "0.72rem", color: "var(--snow)" }}>{img.caption}</span>
+
+            {/* Content Captions Overlap Shroud */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1a1208]/70 via-transparent to-transparent flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              <span className="text-[0.72rem] text-stone-100 font-medium tracking-wide">
+                {img.caption}
+              </span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Lightbox */}
+      {/* ==========================================
+          LIGHTBOX PORTAL OVERLAY SYSTEM
+         ========================================== */}
       {lightbox && (
         <div
           onClick={() => setLightbox(null)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 500,
-            background: "rgba(26,18,8,0.97)",
-            backdropFilter: "blur(20px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          className="fixed inset-0 z-[500] bg-[#1a1208]/95 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-300 animate-fadeIn"
         >
+          {/* Universal Close Trigger */}
           <button
             onClick={() => setLightbox(null)}
-            style={{
-              position: "absolute",
-              top: "2rem",
-              right: "2rem",
-              background: "none",
-              border: "1px solid var(--border)",
-              color: "var(--snow)",
-              width: 42,
-              height: 42,
-              borderRadius: "50%",
-              cursor: "pointer",
-              fontSize: "1.1rem",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+            className="absolute top-6 right-6 bg-transparent hover:bg-white/10 text-stone-200 border border-stone-200/20 w-11 h-11 rounded-full cursor-pointer text-sm flex items-center justify-center transition-colors shadow-lg active:scale-95"
+            aria-label="Close lightbox"
           >
             ✕
           </button>
-          <img
-            src={lightbox}
-            alt=""
-            style={{ maxWidth: "90vw", maxHeight: "85vh", borderRadius: "4px", objectFit: "contain" }}
-            onClick={(e) => e.stopPropagation()}
-          />
+
+          {/* Projected Active Render Object Frame */}
+          <div className="relative max-w-full max-h-full flex items-center justify-center">
+            <img
+              src={lightbox}
+              alt="Enlarged gallery view"
+              className="max-w-[95vw] md:max-w-[90vw] max-h-[85vh] rounded object-contain shadow-2xl selection:bg-transparent"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
         </div>
       )}
     </>

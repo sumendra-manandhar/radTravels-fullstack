@@ -23,132 +23,66 @@ export default function PackageClientBody({
     <>
       <PackageHero pkg={pkg} />
 
-      {/* Body grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 340px",
-          maxWidth: 1400,
-          margin: "0 auto",
-          padding: "0 3rem",
-        }}
-      >
-        <PackageMainContent pkg={pkg} />
-        <aside style={{ padding: "3rem 0 3rem 3rem" }}>
-          <BookingSidebar pkg={pkg} />
+      {/* 🏛️ Main Page Split Layout Grid */}
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_340px] px-4 sm:px-6 lg:px-12 gap-0 lg:gap-12">
+        {/* Main Content Area */}
+        <main className="w-full min-w-0 order-1">
+          <PackageMainContent pkg={pkg} />
+        </main>
+
+        {/* Dynamic Sidebar - Drops cleanly beneath main details on mobile screens */}
+        <aside className="w-full lg:w-[340px] pt-4 pb-12 lg:py-20 order-2 lg:order-2 border-t lg:border-t-0 border-stone-200 dark:border-white/10 mt-8 lg:mt-0">
+          <div className="sticky top-24">
+            <BookingSidebar pkg={pkg} />
+          </div>
         </aside>
       </div>
 
-      {/* Similar packages */}
+      {/* 🔄 Related Adventures Track */}
       {similar.length > 0 && (
-        <div
-          style={{
-            padding: "5rem 3rem",
-            borderTop: "1px solid var(--border)",
-            maxWidth: 1400,
-            margin: "0 auto",
-          }}
-        >
-          <div className="section-eyebrow" style={{ marginBottom: "0.7rem" }}>
-            You May Also Like
-          </div>
-          <h2
-            style={{
-              fontFamily: "'Syne', sans-serif",
-              fontWeight: 800,
-              fontSize: "2rem",
-              letterSpacing: "-0.03em",
-              marginBottom: "2.5rem",
-            }}
-          >
-            Similar adventures.
-          </h2>
+        <div className="border-t border-stone-200 dark:border-white/10 bg-[#FAF7F2] dark:bg-[#15110C] transition-colors duration-300">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 py-16 md:py-20">
+            <div className="text-xs font-bold tracking-[0.2em] uppercase text-[var(--saffron)] mb-2">
+              You May Also Like
+            </div>
+            <h2 className="font-['Syne'] font-extrabold text-2xl md:text-3xl tracking-tighter text-[#1a1208] dark:text-white mb-10">
+              Similar adventures.
+            </h2>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "1.5rem",
-            }}
-          >
-            {similar.map((sim) => (
-              <Link
-                key={sim.slug}
-                href={`/packages/${sim.slug}`}
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  display: "block",
-                }}
-              >
-                <div
-                  style={{
-                    borderRadius: "6px",
-                    overflow: "hidden",
-                    border: "1px solid var(--border)",
-                    transition: "transform 0.3s, border-color 0.3s",
-                    cursor: "pointer",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.transform =
-                      "translateY(-5px)";
-                    (e.currentTarget as HTMLDivElement).style.borderColor =
-                      "var(--saffron)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.transform =
-                      "translateY(0)";
-                    (e.currentTarget as HTMLDivElement).style.borderColor =
-                      "var(--border)";
-                  }}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {similar.map((sim) => (
+                <Link
+                  key={sim.slug}
+                  href={`/packages/${sim.slug}`}
+                  className="group block no-underline color-inherit text-inherit"
                 >
-                  <div style={{ height: 180, overflow: "hidden" }}>
-                    <img
-                      src={sim.heroImage}
-                      alt={sim.name}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        display: "block",
-                      }}
-                    />
-                  </div>
-                  <div style={{ padding: "1.2rem" }}>
-                    <div
-                      style={{
-                        fontFamily: "'Syne', sans-serif",
-                        fontWeight: 700,
-                        fontSize: "1rem",
-                        marginBottom: "0.4rem",
-                        color: "var(--snow)",
-                      }}
-                    >
-                      {sim.name}
+                  <div className="h-full rounded-lg overflow-hidden border border-stone-200 dark:border-white/10 bg-white dark:bg-[#1a1208] shadow-sm transition-all duration-300 transform group-hover:-translate-y-1 group-hover:border-[var(--saffron)]">
+                    {/* Card Thumbnail Image */}
+                    <div className="h-44 sm:h-48 overflow-hidden relative bg-stone-100 dark:bg-stone-900">
+                      <img
+                        src={sim.heroImage}
+                        alt={sim.name}
+                        className="w-full h-full object-cover block object-center transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
                     </div>
-                    <div
-                      style={{
-                        fontSize: "0.75rem",
-                        color: "var(--mist)",
-                        marginBottom: "0.8rem",
-                      }}
-                    >
-                      {sim.duration} · {sim.maxAltitude} · {sim.difficulty}
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: "'Syne', sans-serif",
-                        fontWeight: 800,
-                        color: "var(--saffron)",
-                        fontSize: "1.1rem",
-                      }}
-                    >
-                      From ${sim.priceFrom.toLocaleString()}
+
+                    {/* Content Meta Text Block */}
+                    <div className="p-5">
+                      <div className="font-['Syne'] font-bold text-[1.05rem] leading-snug mb-1 text-[#1a1208] dark:text-white transition-colors group-hover:text-[var(--saffron)]">
+                        {sim.name}
+                      </div>
+                      <div className="text-[0.78rem] tracking-wide text-stone-500 dark:text-stone-400 mb-4">
+                        {sim.duration} · {sim.maxAltitude} · {sim.difficulty}
+                      </div>
+                      <div className="font-['Syne'] font-extrabold text-lg text-[var(--saffron)] leading-none">
+                        From ${sim.priceFrom.toLocaleString()}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       )}

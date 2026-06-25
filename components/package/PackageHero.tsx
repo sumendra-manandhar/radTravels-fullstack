@@ -33,200 +33,104 @@ export default function PackageHero({ pkg }: { pkg: Package }) {
   ];
 
   return (
-    <div
-      style={{
-        height: "92vh",
-        minHeight: 600,
-        position: "relative",
-        display: "flex",
-        alignItems: "flex-end",
-        overflow: "hidden",
-      }}
-    >
-      {/* BG */}
+    <section className="relative min-h-[600px] h-[92vh] w-full flex items-end justify-center overflow-hidden bg-[#FAF7F2] dark:bg-[#151a17] transition-colors duration-300">
+      {/* Background Graphic Dynamic Sheet */}
       <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `url('${pkg.heroImage}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          zIndex: 0,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to top, rgba(26,18,8,1) 0%, rgba(26,18,8,0.55) 40%, rgba(26,18,8,0.15) 100%)",
-          zIndex: 1,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to right, rgba(26,18,8,0.55) 0%, transparent 60%)",
-          zIndex: 1,
-        }}
+        className="absolute inset-0 bg-cover bg-center z-0 transition-all duration-500 scale-100 dark:brightness-[0.85]"
+        style={{ backgroundImage: `url('${pkg.heroImage}')` }}
       />
 
-      {/* Content */}
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          padding: "0 3rem 4.5rem",
-          width: "100%",
-        }}
-      >
-        {/* Breadcrumb */}
+      {/* Light Mode Vignette Shading Layer */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-[#FAF7F2]/40 to-transparent dark:from-transparent z-10 opacity-100 dark:opacity-0 transition-opacity pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2]/60 to-transparent dark:from-transparent z-10 opacity-100 dark:opacity-0 transition-opacity pointer-events-none" />
+
+      {/* Dark Mode True Shading Layer */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#151a17] via-[#151a17]/60 to-[#151a17]/20 z-10 opacity-0 dark:opacity-100 transition-opacity pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#151a17]/50 to-transparent z-10 opacity-0 dark:opacity-100 transition-opacity pointer-events-none" />
+
+      {/* Central Content Boundary Constraint Frame */}
+      <div className="relative z-20 w-full max-w-[1400px] mx-auto px-6 pb-12 md:px-12 md:pb-16 lg:pb-20">
+        {/* Breadcrumb Navigation Path */}
         <div
           ref={breadRef}
-          style={{
-            fontSize: "0.72rem",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "rgba(245,242,236,0.5)",
-            marginBottom: "1.2rem",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.6rem",
-          }}
+          className="text-[0.72rem] font-medium tracking-[0.15em] uppercase text-stone-600/70 dark:text-[#FAF7F2]/50 mb-6 flex items-center gap-2"
         >
-          <a
-            href="/"
-            style={{ color: "var(--saffron)", textDecoration: "none" }}
-          >
+          <a href="/" className="text-[var(--saffron)] hover:underline">
             Home
           </a>
-          <span style={{ opacity: 0.4 }}>/</span>
+          <span className="opacity-40">/</span>
           <a
             href="/#packages"
-            style={{ color: "var(--saffron)", textDecoration: "none" }}
+            className="text-[var(--saffron)] hover:underline"
           >
             {pkg.category === "trekking" ? "Trekking" : "MTB"}
           </a>
-          <span style={{ opacity: 0.4 }}>/</span>
-          {pkg.name}
+          <span className="opacity-40">/</span>
+          <span className="text-stone-800 dark:text-[#FAF7F2] truncate max-w-[180px] sm:max-w-none">
+            {pkg.name}
+          </span>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: "3rem",
-          }}
-        >
-          {/* Left: title */}
-          <div style={{ maxWidth: 700 }}>
+        {/* Layout Structural Splitter Grid */}
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-10 lg:gap-12">
+          {/* Left Wing Elements: Difficulty Badge, Title Header, Subhead Tagline */}
+          <div className="max-w-3xl w-full">
             <span
               ref={badgeRef}
-              className={difficultyColor[pkg.difficulty]}
-              style={{
-                display: "inline-block",
-                color: "#fff",
-                fontFamily: "'Syne', sans-serif",
-                fontWeight: 700,
-                fontSize: "0.65rem",
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                padding: "0.3rem 0.9rem",
-                borderRadius: "2px",
-                marginBottom: "1.2rem",
-              }}
+              className={`${difficultyColor[pkg.difficulty]} inline-block text-white font-['Syne'] font-bold text-[0.65rem] tracking-[0.15em] uppercase px-3 py-1.5 rounded-[2px] mb-5 shadow-sm`}
             >
               {pkg.difficulty}
             </span>
 
             <h1
               ref={titleRef}
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontWeight: 800,
-                fontSize: "clamp(3rem, 6vw, 6.5rem)",
-                lineHeight: 0.95,
-                letterSpacing: "-0.04em",
-                marginBottom: "1.2rem",
-              }}
+              className="font-['Syne'] font-extrabold text-[clamp(2.5rem,5.5vw,5.5rem)] leading-[0.95] tracking-tighter text-[#1a1208] dark:text-white mb-6"
             >
               {pkg.name.split(" ").map((word, i, arr) =>
                 i === arr.length - 1 ? (
-                  <em
+                  <span
                     key={i}
-                    style={{
-                      color: "var(--saffron)",
-                      fontStyle: "normal",
-                      display: "block",
-                    }}
+                    className="text-[var(--saffron)] font-normal not-italic block mt-1"
                   >
                     {word}
-                  </em>
+                  </span>
                 ) : (
-                  <span key={i}>{word} </span>
+                  <span key={i} className="inline-block mr-3">
+                    {word}
+                  </span>
                 ),
               )}
             </h1>
 
             <p
               ref={tagRef}
-              style={{
-                fontSize: "1rem",
-                lineHeight: 1.65,
-                color: "rgba(245,242,236,0.65)",
-                maxWidth: 520,
-              }}
+              className="text-[0.95rem] md:text-[1rem] leading-relaxed text-stone-700/80 dark:text-[#FAF7F2]/65 max-w-xl"
             >
               {pkg.tagline}
             </p>
           </div>
 
-          {/* Right: quick stats card */}
+          {/* Right Wing Component Element: Quick Stats Glassmorphic Dashboard Card */}
           <div
             ref={statsRef}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1.4rem",
-              background: "rgba(26,18,8,0.7)",
-              backdropFilter: "blur(10px)",
-              border: "1px solid var(--border)",
-              borderRadius: "6px",
-              padding: "2rem 2.5rem",
-              minWidth: 240,
-              flexShrink: 0,
-            }}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-col gap-x-6 gap-y-5 lg:gap-6 bg-white/70 dark:bg-[#1a1208]/70 backdrop-blur-md border border-stone-200/60 dark:border-white/10 rounded-lg p-6 sm:p-8 min-w-full sm:min-w-0 lg:min-w-[260px] flex-shrink-0 shadow-xl dark:shadow-black/20"
           >
             {quickStats.map((s) => (
-              <div key={s.label}>
-                <div
-                  style={{
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                    color: "var(--mist)",
-                    marginBottom: "0.2rem",
-                  }}
-                >
+              <div
+                key={s.label}
+                className="border-b border-stone-200/40 dark:border-white/5 pb-2 lg:pb-0 lg:border-none"
+              >
+                <div className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-stone-500 dark:text-stone-400 mb-1">
                   {s.label}
                 </div>
-                <div
-                  style={{
-                    fontFamily: "'Syne', sans-serif",
-                    fontWeight: 700,
-                    fontSize: "1.1rem",
-                  }}
-                >
-                  <span style={{ color: "var(--saffron)" }}>{s.value}</span>
+                <div className="font-['Syne'] font-bold text-lg md:text-xl text-[#1a1208] dark:text-white">
+                  <span className="text-[var(--saffron)]">{s.value}</span>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -2,42 +2,53 @@ import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import HomeHero from "@/components/home/HomeHero";
 import PackagesSection from "@/components/home/PackagesSection";
-import { AboutSection, WhySection, SeasonsSection, TestimonialsSection, CTASection } from "@/components/home/HomeSections";
+import {
+  AboutSection,
+  WhySection,
+  SeasonsSection,
+  TestimonialsSection,
+  CTASection,
+} from "@/components/home/HomeSections";
 
 export default function HomePage() {
+  const marqueeItems = [
+    "Everest Base Camp",
+    "Annapurna Circuit",
+    "Upper Mustang MTB",
+    "Langtang Valley",
+    "Manaslu Circuit",
+    "Pokhara MTB",
+    "Kanchenjunga",
+    "Poon Hill",
+    "Sarangkot Ride",
+  ];
+
   return (
     <>
       <Nav variant="home" />
       <HomeHero />
 
-      {/* Marquee */}
-      <div style={{ background: "var(--saffron)", overflow: "hidden", padding: "0.85rem 0" }}>
-        <div
-          className="marquee-track"
-          style={{ display: "flex", gap: "4rem", whiteSpace: "nowrap" }}
-        >
-          {Array(2).fill([
-            "Everest Base Camp", "Annapurna Circuit", "Upper Mustang MTB",
-            "Langtang Valley", "Manaslu Circuit", "Pokhara MTB",
-            "Kanchenjunga", "Poon Hill", "Sarangkot Ride",
-          ]).flat().map((item, i) => (
-            <span
-              key={i}
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontWeight: 700,
-                fontSize: "0.78rem",
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: "var(--earth)",
-                flexShrink: 0,
-              }}
+      {/* 🏃‍♂️ INFINITE HARDWARE-ACCELERATED MARQUEE RUNWAY */}
+      <div className="w-full bg-[var(--saffron)] overflow-hidden py-3.5 select-none relative z-20">
+        <div className="flex w-max items-center">
+          {/* Loop Array Duplication Runway for Infinite Tracking Context */}
+          {[...Array(4)].map((_, groupIndex) => (
+            <div
+              key={groupIndex}
+              className="flex items-center gap-16 whitespace-nowrap animate-marquee px-8"
+              aria-hidden={groupIndex > 0 ? "true" : "false"}
             >
-              {i % 1 === 0 && i > 0 && (
-                <span style={{ display: "inline-block", width: 4, height: 4, background: "var(--earth)", borderRadius: "50%", verticalAlign: "middle", margin: "0 2rem 2px" }} />
-              )}
-              {item}
-            </span>
+              {marqueeItems.map((item, itemIndex) => (
+                <span
+                  key={itemIndex}
+                  className="font-['Syne'] font-bold text-[0.78rem] tracking-[0.15em] uppercase text-[var(--earth)] flex items-center shrink-0"
+                >
+                  {/* Bullet Dot Separator Node */}
+                  <span className="inline-block w-1.5 h-1.5 bg-[var(--earth)] rounded-full mr-16 opacity-60 shrink-0" />
+                  {item}
+                </span>
+              ))}
+            </div>
           ))}
         </div>
       </div>

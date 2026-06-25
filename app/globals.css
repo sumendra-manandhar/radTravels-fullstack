@@ -1,14 +1,20 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   RAD TRAVELS - CUSTOM CSS VARIABLE DESIGN SYSTEM
+   ========================================================================== */
+
 :root {
-  --snow: #f5f2ec;
-  --earth: #1a1208;
-  --saffron: #e8870a;
-  --pine: #1e3a2f;
-  --ice: #c8dde8;
-  --mist: #8a9ba8;
-  --border: rgba(245, 242, 236, 0.08);
-  --card-bg: rgba(245, 242, 236, 0.04);
+  /* --- LIGHT MODE / COMFORTABLE DAY THEME --- */
+  --earth: #1a1208; /* Deep rich obsidian charcoal */
+  --snow: #ffffff; /* Pure brilliant white */
+  --saffron: #e8870a; /* Himalayan accent golden-orange */
+  --pine: #1b2e24; /* Rich dark forest green */
+  --mist: #576265; /* Crisp mountain-fog slate */
+
+  /* Layout Structure Colors */
+  --border: rgba(26, 18, 8, 0.1); /* Subtle dark lines for light mode */
+  --card-bg: #ffffff;
 }
 
 * {
@@ -19,13 +25,26 @@ html {
 }
 
 body {
-  background: var(--earth);
-  color: var(--snow);
+  /* color: var(--earth); */
   font-family: "Inter", sans-serif;
   font-weight: 300;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+.dark {
+  /* --- DARK MODE / TIBETAN NIGHT THEME --- */
+  --earth: #0b0704; /* Absolving shadow background */
+  --snow: #f5f2ec; /* Soft ivory/cream text to avoid eye strain */
+  --saffron: #f49b23; /* Brighter, luminous saffron pop */
+  --pine: #111a14; /* Deep midnight evergreen */
+  --mist: #9bb0a5; /* Soft high-contrast mist grey */
+
+  /* Layout Structure Colors */
+  --border: rgba(245, 242, 236, 0.12); /* Delicate glowing border strings */
+  --card-bg: #1c1610; /* Soft elevated pitch-black boxes */
+}
+
 /* 
 section > *,
 footer > * {
