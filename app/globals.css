@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  --snow: #f5f2ec;
+  --earth: #1a1208;
+  --saffron: #e8870a;
+  --pine: #1e3a2f;
+  --ice: #c8dde8;
+  --mist: #8a9ba8;
+  --border: rgba(245, 242, 236, 0.08);
+  --card-bg: rgba(245, 242, 236, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--earth);
+  color: var(--snow);
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+/* 
+section > *,
+footer > * {
+  width: min(100%, 1280px);
+  margin-left: auto;
+  margin-right: auto;
+} */
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--earth);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--saffron);
+  border-radius: 2px;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 22s linear infinite;
+}
+
+/* Scroll line animation */
+@keyframes scrollline {
+  0% {
+    top: -100%;
+    bottom: 100%;
+  }
+  50% {
+    top: 0;
+    bottom: 0;
+  }
+  100% {
+    top: 100%;
+    bottom: -100%;
+  }
+}
+
+/* Elevation chart dash */
+@keyframes drawPath {
+  from {
+    stroke-dashoffset: var(--path-len);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.elev-animate {
+  animation: drawPath 2s ease-out forwards;
+}
+
+/* Itin accordion */
+.itin-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.itin-body.open {
+  max-height: 500px;
+}
+
+/* Lightbox */
+.lightbox-enter {
+  opacity: 0;
+}
+.lightbox-enter-active {
+  opacity: 1;
+  transition: opacity 0.25s;
+}
+.lightbox-exit {
+  opacity: 1;
+}
+.lightbox-exit-active {
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+/* Utility */
+.section-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+}
