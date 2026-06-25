@@ -141,7 +141,7 @@ export default function Nav({ variant = "home" }: NavProps) {
             {/* Controls (Theme Toggle + CTA/Hamburger) */}
             <div className="flex items-center gap-4">
               {/* Desktop Theme Toggle Switch Button */}
-              <button
+              {/* <button
                 onClick={toggleTheme}
                 className={`hidden md:flex items-center justify-center p-2 rounded-full border transition-all duration-200 hover:scale-105 active:scale-95 ${
                   scrolled
@@ -151,7 +151,7 @@ export default function Nav({ variant = "home" }: NavProps) {
                 aria-label="Toggle Night Mode"
               >
                 {isDarkMode ? "☀️" : "🌙"}
-              </button>
+              </button> */}
 
               <a
                 href="#contact"
@@ -181,7 +181,7 @@ export default function Nav({ variant = "home" }: NavProps) {
         ) : (
           /* --- DESKTOP NAV VARIANT: PACKAGE --- */
           <div className="flex items-center gap-6">
-            <button
+            {/* <button
               onClick={toggleTheme}
               className={`flex items-center justify-center p-2 rounded-full border transition-all duration-200 ${
                 scrolled
@@ -190,7 +190,7 @@ export default function Nav({ variant = "home" }: NavProps) {
               }`}
             >
               {isDarkMode ? "☀️" : "🌙"}
-            </button>
+            </button> */}
             <Link
               href="/"
               className={`text-[0.78rem] tracking-widest uppercase transition-colors duration-200 ${
